@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path')
 let dbProducto = require('../data/database')
 
 
@@ -24,12 +22,12 @@ module.exports={
     
     categorias:function(req,res){
 
-        let cat=req.params.category
+        let cat=req.params.cat
 
         let categoria = dbProducto.forEach(producto => {
             return cat == producto.category
          })
-         res.render('categorias',{
+         res.render('categoria',{
             title: "WASSER",
             categoria: categoria,
         })
