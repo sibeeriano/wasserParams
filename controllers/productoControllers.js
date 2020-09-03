@@ -24,12 +24,13 @@ module.exports={
 
         let cat=req.params.cat
 
-        let categoria = dbProducto.forEach(producto => {
-            return cat == producto.category
+        let category = dbProducto.forEach(producto => {
+            return category == producto.category
          })
-         res.render('categoria',{
+         res.render('categora',{
             title: "WASSER",
-            categoria: categoria,
+            category: category,
+            dbProducto:dbProducto
         })
     }
     

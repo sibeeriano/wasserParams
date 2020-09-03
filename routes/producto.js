@@ -4,8 +4,8 @@ const controller = require('../controllers/productoControllers')
 
 
 
-router.get('/productos',controller.listar);
-router.get('/categorias/:cat',controller.categorias);
-router.get('/categorias/:cat/:id',controller.producto);
+router.get('/producto',controller.listar);
+router.get('/:category',controller.categorias);
+router.get('/:category/:id',controller.producto);
 
 module.exports = router
