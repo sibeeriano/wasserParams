@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="no-js" lang="ES">
+<head> 
+<title>WASSER/About us</title>
+<%- include('./partials/head') %>     
+</head>    
+
+<body>
+  <%- include('./partials/preloader') %>
+
+<header>
+  <%- include('./partials/header') %>
+</header>
+
+<main>
+
+    <div class="container">    
+        <div class="row">
+          <% dbProducto.forEach(producto => { %>
+          <% if (product.category == categoria){  %>
+          
+            
+            <div class="col-sm-3">
+              <div class="panel panel-primary">
+                <div class="panel-heading"><%- producto.name %>  </div>
+                <div class="panel-body"><a href="/"><img src="<%- producto.image %> " class="img-responsive" style="width:100%" alt="Image"></a></div>
+                <div class="panel-footer">$<%- producto.price %> </div>
+                <div class="panel-footer">.</div>
+              </div>
+            </div>
+
+           
+       
+            <% } %>  
+            <% }) %>
+         </div>
+      </div> 
+          
+       
+       
+
+
+
+
+</main>
+
+<footer>
+    <%- include('./partials/footer') %>
+</footer>           
+    <%- include('./partials/scripts') %>  
+</body>
+</html>
