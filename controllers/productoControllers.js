@@ -5,36 +5,38 @@ module.exports={
     listar:function(req, res){
         res.render('productos',{
             title:"Nuestros productos",
-            dbProducto:dbProducto
+            productos:dbProducto
         });
+    },
+
+    categorias:function(req,res){
+
+        let cat=req.params.cat
+
+        let productos = dbProducto.filter(producto=>{
+            return producto.category == cat
+        })
+       
+         res.render('categoria',{
+            title: "WASSER",
+            productos:productos
+        })
     },
 
     producto: function(req, res) { //detalle de producto
         let id=req.params.id
 
-        let producto = dbProduct.forEach((producto) => {
+        let producto = dbProducto.filter((producto) => {
             return id == producto.id});
         
             res.render('producto',{
                 producto:producto
         });
-    },
-    
-    categorias:function(req,res){
-
-        let cat=req.params.cat
-
-        let category = dbProducto.forEach(producto => {
-            return category == producto.category
-         })
-         res.render('categora',{
-            title: "WASSER",
-            category: category,
-            dbProducto:dbProducto
-        })
     }
     
+    
 }
+
 
 
 
