@@ -1,5 +1,7 @@
-let dbProducto = require('../data/database')
+const dbProducto = require('../data/database')
 
+const fs = require('fs');
+const path = require ('path');
 
 module.exports={
     listar:function(req, res){
@@ -41,32 +43,32 @@ module.exports={
             })
     },
 
-    publicarProducto: function(req,res,next){
-        let lastID = 1;
+    publicar: function(req,res){
+    
+        let lastID= 1;
 
-        dbProducto.forEach(producto=>{
+        dbProducto.forEach(producto => {
             if(producto.id > lastID){
                 lastID = producto.id
-            }
-        })
-        let nuevoProducto={
+            }            
+        });
+    
+        let newProduct ={
             id: lastID + 1,
-            name: req.body.name.trim(),
-            color: req.body.color,
-            price: Number(req.body.price),
+            name: req.body.name,
+            colors: req.body.color,
+            price: req.body.price,
             category: req.body.category,
-            description:req.body.description,
-            imagen: (req.files[0])?req.files[0].filename:"productoMuestra.png"
-        };
-        dbProducto.push(nuevoProducto);
-        fs.writeFileSync(path.join(__dirname,"..",'data',"products.json"),JSON.stringify(dbProducto),'utf-8');
-        res.redirect('/productos');
-    },
+            description: req.body.description,
+            image: "https://www.pequenomundo.cl/wp-content/themes/childcare/images/default.png"
+            }
 
+            dbProducto.push(newProduct);
 
-
-    
-    
+            fs.writeFileSync(path.join(__dirname,"..",'data', "products.json"),JSON.stringify(dbProducto),"utf-8")
+            
+            res.redirect('/productos')
+    }      
     
 }
 
