@@ -43,7 +43,7 @@ module.exports={
             })
     },
 
-    publicar: function(req,res){
+    publicar: function(req,res,next){
     
         let lastID= 1;
 
@@ -53,6 +53,8 @@ module.exports={
             }            
         });
     
+        
+
         let newProduct ={
             id: lastID + 1,
             name: req.body.name,
@@ -60,7 +62,7 @@ module.exports={
             price: req.body.price,
             category: req.body.category,
             description: req.body.description,
-            image: "https://www.pequenomundo.cl/wp-content/themes/childcare/images/default.png"
+            image: (req.files[0])?req.files[0]:"default-image.png"
             }
 
             dbProducto.push(newProduct);
