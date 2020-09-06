@@ -5,7 +5,12 @@ const controller = require('../controllers/productoControllers')
 
 
 router.get('/',controller.listar);
-router.get('/:cat',controller.categorias);
-router.get('/:cat/:id?',controller.producto);
+router.get('/agregar', controller.agregar);
+router.post('/agregar', controller.publicarProducto);
+router.get('/:cat?',controller.categorias);
+router.get('/:cat?/:id?',controller.producto);
+
+
+
 
 module.exports = router
