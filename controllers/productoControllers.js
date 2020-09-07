@@ -62,7 +62,7 @@ module.exports={
             price: req.body.price,
             category: req.body.category,
             description: req.body.description,
-            image: (req.files[0])?req.files[0]:"default-image.png"
+            image: (req.files[0])?req.files[0].filename:"default-image.png" //NO FUNCIONA
             }
 
             dbProducto.push(newProduct);
@@ -70,7 +70,45 @@ module.exports={
             fs.writeFileSync(path.join(__dirname,"..",'data', "products.json"),JSON.stringify(dbProducto),"utf-8")
             
             res.redirect('/productos')
-    }      
+    },
+    
+    vistaEditar:function(req,res,next){
+        let idProducto = req.params.id;
+
+        res.render('EditarProducto',{
+            title:"Edicion de producto",
+            idProducto:idProducto,
+            dbProducto:dbProducto
+        })
+
+    },
+    guardarEditar:function(req,res,next){
+        let idProducto = req.params.id;
+        dbProducto.forEach(function(producto){
+            if(producto.id == idProducto){
+                producto.id = Number(idProducto);
+                producto.name = req.body.name;
+                producto.price = req.body.price;
+                producto.category = req.body.category;
+                producto.description = req.body.description;
+                producto.image = (req.files[0]?req.files[0].filename:producto.imagen)
+            }
+        })
+        fs.writeFileSync(path.join(__dirname,"..",'data', "products.json"),JSON.stringify(dbProducto),"utf-8")
+        res.redirect('/productos')
+    },
+    delete: (req,res)=>{
+        let productodelete = req.params.id;
+        let borrar;
+        dbProducto.forEach((producto)=>{
+            if(producto.id == productodelete){
+                borrar = dbProducto.indexOf(producto)
+            }
+        })
+        dbProducto.splice(borrar,1)
+        fs.writeFileSync(path.join(__dirname,"..",'data', "products.json"),JSON.stringify(dbProducto),"utf-8")
+        res.redirect('/productos')
+    }
     
 }
 

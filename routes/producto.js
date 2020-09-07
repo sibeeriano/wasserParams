@@ -24,6 +24,10 @@ router.post('/agregar',upload.any(), controller.publicar);
 router.get('/:cat?',controller.categorias);
 router.get('/:cat?/:id?',controller.producto);
 
+router.get('/Editar/:id', controller.vistaEditar)
+router.put('/Editar/:id', upload.any(),controller.guardarEditar)
+router.delete('/delete/:id', controller.delete)
+
 
 
 
