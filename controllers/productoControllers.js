@@ -1,7 +1,7 @@
 const dbProducto = require('../data/database')
-
 const fs = require('fs');
 const path = require ('path');
+const { rawListeners } = require ('process')
 
 module.exports={
     listar:function(req, res){
@@ -57,7 +57,7 @@ module.exports={
 
         let newProduct ={
             id: lastID + 1,
-            name: req.body.name,
+            name: req.body.name.trim(),
             colors: req.body.color,
             price: req.body.price,
             category: req.body.category,
